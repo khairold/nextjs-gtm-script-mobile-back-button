@@ -1,36 +1,42 @@
-## Example app using Google Tag Manager
+# Describe the bug
 
-This example shows how to use Next.js along with Google Tag Manager. [`pages/_document.js`](pages/_document.js) is used to inject [base code](https://developers.google.com/tag-manager/quickstart). [`pages/_app.js`](pages/_app.js) is used to track route changes and send page views to Google Tag Manager.
+Clicking or tapping the back button on a mobile device browser would only change the url, but not the content.
+This will happen when initiating Moengage Web SDK.
 
-## Deploy your own
+Should you go to \_app.js and comment out the Script component, back button on a mobile device browser would behave as expected.
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
+# Expected Behavior
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-google-tag-manager&project-name=with-google-tag-manager&repository-name=with-google-tag-manager)
+Clicking the Back button on a mobile browser will go to the previous page
 
-## How to use
+# Provide environment information
 
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
-
-```bash
-npx create-next-app --example with-google-tag-manager with-google-tag-manager-app
+```
+    Operating System:
+      Platform: darwin
+      Arch: arm64
+      Version: Darwin Kernel Version 21.5.0: Tue Apr 26 21:08:29 PDT 2022; root:xnu-8020.121.3~4/RELEASE_ARM64_T8101
+    Binaries:
+      Node: 16.11.0
+      npm: 8.0.0
+      Yarn: 1.22.15
+      pnpm: N/A
+    Relevant packages:
+      next: 12.2.4-canary.8
+      eslint-config-next: N/A
+      react: 17.0.2
+      react-dom: 17.0.2
 ```
 
-```bash
-yarn create next-app --example with-google-tag-manager with-google-tag-manager-app
-```
+# To Reproduce
 
-```bash
-pnpm create next-app --example with-google-tag-manager with-google-tag-manager-app
-```
-
-Next, copy the `.env.local.example` file in this directory to `.env.local` (which will be ignored by Git):
-
-```bash
-cp .env.local.example .env.local
-```
-
-Set the `NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID` variable in `.env.local` to match your Google Tag Manager ID.
-
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
-# nextjs-gtm-script-mobile-back-button
+- Clode the reproduction repository
+- run `npm install`
+- run `npm run dev` to start the development server
+- Use a mobile device OR Chrome mobile simulator OR Firefox mobile simulator to browse
+- Go to [http://localhost:3000/a](http://localhost:3000/a)
+- On the page, click on _Click here and go to the B page_
+- You should now be on http://localhost:3000/b
+- Click or Tap the browser's back button
+- You now should be on http://localhost:3000/a
+- The issue is, the url is changed back to http://localhost:3000/a but the content does not change
